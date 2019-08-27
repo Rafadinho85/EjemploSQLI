@@ -1,21 +1,23 @@
 <?php
 
 declare(strict_types=1);
-
+include 'config.inc.php';
 session_start();
 
 function validarUsuario(){
-
     $CORREO=strtoupper($_POST ['email']);
     $CLAVE =strtoupper($_POST ['pwd']);
-    $conexion = mysqli_connect("localhost","root","","bdpaginasweb")
-	or die("Hay un Error de Conexion " . mysqli_error($conexion));
+    $db=new Conect_MySql();
 
-    $query = "SELECT * FROM tb_usuarios where correoe='".$CORREO."' and clave =MD5('".$CLAVE."')" 
-	or die("Error in the consult.." . mysqli_error($conexion));
+    //$conexion = mysqli_connect("localhost","root","","bdpaginasweb")
+	//or die("Hay un Error de Conexion " . mysqli_error($db));
 
-    $resultado = $conexion->query($query);
-    $numerofilas = mysqli_num_rows($resultado);
+    $query = "SELECT * FROM tb_usuarios where correoe='".$CORREO."' and clave =MD5('".$CLAVE."')" ;
+	//or die("Error in the consult.." . mysqli_error($db));
+
+   // $resultado = $db->query($query);
+   $sql = $db->execute($query); 
+   $numerofilas = mysqli_num_rows($sql);
 
     if($numerofilas ==0){
         session_unset();
@@ -24,7 +26,7 @@ function validarUsuario(){
 
     } else {
 
-        while($row = mysqli_fetch_array($resultado)) {
+        while($row = mysqli_fetch_array($sql)) {
             echo " <br>". $row["CORREOE"] . " es valido </br>";
             $_SESSION['USUARIO_LOGUEADO']  = true;
             $_SESSION['LOGIN']  = $row["CORREOE"];
@@ -34,7 +36,7 @@ function validarUsuario(){
         }
 
     }
-    mysqli_close($conexion);
+    mysqli_close($db);
 
 }
 

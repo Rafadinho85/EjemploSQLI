@@ -12,28 +12,30 @@
 
 
 
-    <form role="form" method="post" action="compruebausuario.php">
+    <form method="post" action="" enctype="multipart/form-data">
+        <table>
+            <tr>
+                <td><label>Correo</label></td>
+                <td><input type="email" name="correo"></td>
+            </tr>
 
+            <tr>
+                <td><label>Nombre Completo</label></td>
+                <td><input type="text" name="nom"></td>
+            </tr>
 
-        <div>
-            <label for="">Direccion de Correo</label>
-            <input type="email" class="form-control" id="email" name="email">
-        </div>
-
-
-        <div>
-            <label for="">Clave</label>
-            <input type="password" class="form-control" id="pwd" name="pwd">
-        </div>
-
-
-        <div class="checkbox">
-            <label for=""><input type="checkbox">Recordarme</label>
-        </div>
-
-        <button type="submit">Ingresar</button>
-
-    </form>
+            <tr>
+                <td><label>Descripcion</label></td>
+                <td><textarea name="descripcion"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="file" name="archivo"></td>
+            <tr>
+                <td><input type="submit" value="subir" name="subir"></td>
+                <td><a href="lista.php">lista</a></td>
+            </tr>
+        </table>
+    </form>            
 
 </body>
 
